@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [{"App_Name": "Flipkart", "App_Company": "Flipkart Online Services Pvt.Ltd", "App_Size": 74.1, "App_Rating": 4.6,"App_Category":"Shopping"},{"App_Name": "Lenskart", "App_Company": "Lenskart Solutions", "App_Size": 136.8, "App_Rating": 4.2,"App_Category":"Shopping"},{"App_Name": "Phonepe", "App_Company": "Phonepe Private Limited", "App_Size": 190.5, "App_Rating": 4.7,"App_Category":"Finance"}]
+  div.container-fluid 
+    div.row 
+        each item, index in results
+            div.col-sm-2(onclick=`buy(${index})`) Application Name: #{item["App_Name"]} <br> Application Company: #{item["App_Company"]} <br> Application Size: #{item["App_Size"]} <br> Application Rating: #{item["App_Rating"]} <br> Application Category: #{item["App_Category"]}
+
+  script.
+    function buy(index) {
+      alert("You purchased item " + index)
+    }
