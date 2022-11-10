@@ -1,10 +1,33 @@
 var Application = require('../models/Application'); 
  
 // List of all Application 
-exports.Application_list = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Application list'); 
+exports.Application_list = async function(req, res) { 
+    try{ 
+        theApplication = await Application.find(); 
+        res.send(theApplication); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
 }; 
  
+
+
+// List of all Application 
+// Handle a show all view
+exports.Application_view_all_Page = async function(req, res) {
+    try{
+    theApplication = await Application.find();
+    res.render('Application', { title: 'Application Search Results', results: theApplication });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+
+
 // for a specific Application. 
 exports.Application_detail = function(req, res) { 
     res.send('NOT IMPLEMENTED: Application detail: ' + req.params.id); 
