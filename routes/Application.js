@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('Application', { title: 'Search Results for Application Class' });
-});
-
-module.exports = router;
+var express = require('express'); 
+const Application_controlers= require('../controllers/Application'); 
+var router = express.Router(); 
+ 
+/* GET costumes */ 
+router.get('/', Application_controlers.Application_view_all_Page ); 
+module.exports = router; 
