@@ -66,3 +66,38 @@ exports.Application_delete = function(req, res) {
 exports.Application_update_put = function(req, res) { 
     res.send('NOT IMPLEMENTED: Application update PUT' + req.params.id); 
 }; 
+
+
+// for a specific Application. 
+exports.Application_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Application.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 
+
+
+// Handle Application update form on PUT. 
+exports.Application_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await Application.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.App_Name) toUpdate.App_Name = req.body.App_Name; 
+        if(req.body.App_Company) toUpdate.App_Company = req.body.App_Company; 
+        if(req.body.App_Size) toUpdate.App_Size = req.body.App_Size;
+        if(req.body.App_Rating) toUpdate.App_Rating = req.body.App_Rating;
+        if(req.body.App_Category) toUpdate.App_Category = req.body.App_Category; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
+}; 
