@@ -101,3 +101,73 @@ exports.Application_update_put = async function(req, res) {
 failed`); 
     } 
 }; 
+
+// Handle Application delete on DELETE. 
+exports.Application_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Application.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+
+// Handle a show one view with id specified by query 
+exports.Application_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await Application.findById( req.query.id) 
+        console.log(result)
+        res.render('Applicationdetail',  { title: 'Application Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+ // Handle building the view for creating a Application. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.Application_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('create', { title: 'Application Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle building the view for updating a Application. 
+// query provides the id 
+exports.Application_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await Application.findById(req.query.id) 
+        res.render('Applicationupdate', { title: 'Application Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle a delete one view with id from query 
+exports.Application_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await Application.findById(req.query.id) 
+        res.render('Applicationdelete', { title: 'Application Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ 

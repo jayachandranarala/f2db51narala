@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let Applicationid = toShow._id
+  - let App_Name = toShow.App_Name
+  - let App_Size = toShow.App_Size 
+  - let App_Rating = toShow.App_Rating 
+  div 
+    div.row 
+      div(class='ApplicationAttr m-2 rounded-2') Application ID is: 
+      div #{Applicationid} 
+    div.row 
+      div(class='ApplicationAttr m-2 rounded-2') Application Type is: 
+      div #{App_Name} 
+    div.row 
+      div(class='ApplicationAttr m-2 rounded-2') Application Size is: 
+      div #{App_Size} 
+    div.row 
+      div(class='ApplicationAttr m-2 rounded-2') Application Cost is: 
+      div #{App_Rating} 
+
+    div(class="container-sm-2")
+      button(class="btn btn-info m-2  rounded-2"  onclick="detail()") Detail 

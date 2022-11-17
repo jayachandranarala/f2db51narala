@@ -1,0 +1,34 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='ApplicationForm', action="/resource/Application", method="POST") 
+    div.form-group 
+        label.ApplicationAttr(for='App_Name') Application type 
+        input#App_Name(type='text', name='App_Name') 
+    div.form-group 
+        label.ApplicationAttr(for='App_Size') Application size 
+        input#App_Size(type='number', name='App_Size') 
+    div.form-group 
+        label.ApplicationAttr(for='App_Rating') Application rating  
+        input#App_Rating(type='number', name='App_Rating') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['ApplicationForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

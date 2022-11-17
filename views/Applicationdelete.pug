@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let Applicationid = toShow._id 
+    - let App_Name = toShow.App_Name 
+    - let App_Size = toShow.App_Size 
+    - let App_Rating = toShow.App_Rating 
+    - let actionid = "/resource/Application/" + Applicationid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='ApplicationAttr m-2 rounded-2') Application ID is: 
+        div #{Applicationid} 
+      div.row 
+        div(class='ApplicationAttr m-2 rounded-2') Application Type is: 
+        div #{App_Name} 
+      div.row 
+        div(class='ApplicationAttr m-2 rounded-2') Application Size is: 
+        div #{App_Size} 
+      div.row 
+        div(class='ApplicationAttr m-2 rounded-2 ') Application Cost is: 
+        div #{App_Rating} 
+ 
+    button(class="btn btn-success m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-dark m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the costume collection 
+      window.location.href='/Application' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      // Don't need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/Application' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

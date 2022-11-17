@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.ApplicationAttr { 
+  background-color: darkorange; 
+  width: 120px; 
+} 
