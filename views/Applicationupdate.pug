@@ -21,9 +21,9 @@ block content
         input#App_Rating(type='number', name='App_Rating', value= App_Rating ) 
     div.form-group 
         label.ApplicationAttr(for='App_Size') Application Size 
-        input#App_Size(type='number', name='App_Size', value= App_Size )
-    input(type="submit") 
- 
+        input#App_Size(type='number', name='App_Size', value= App_Size ) 
+    input(type="submit")
+    
   script. 
     document.forms['ApplicationForm'].addEventListener('submit', (event) => { 
       event.preventDefault(); 
