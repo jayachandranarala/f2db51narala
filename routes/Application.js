@@ -15,22 +15,15 @@ const secured = (req, res, next) => {
 /* GET Application */ 
 router.get('/', Application_controlers.Application_view_all_Page ); 
  
-
 /* GET detail Application page */ 
 router.get('/detail', Application_controlers.Application_view_one_Page);
-
 
 /* GET create Application page */ 
 router.get('/create',secured, Application_controlers.Application_create_Page);
 
-
-
 /* GET create update page */ 
 router.get('/update',secured, Application_controlers.Application_update_Page); 
-
-
 
 //* GET delete Application page */ 
 router.get('/delete',secured, Application_controlers.Application_delete_Page);
 module.exports = router;
-
